@@ -1,12 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { RecetteService } from "../../shared/services/recette.service";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Recette } from "src/app/shared/interfaces/recette.interface";
-import { IngredientService } from "src/app/modules/ingredient/shared/services/ingredient.service";
+import { Observable } from "rxjs";
 import { Ingredient } from "src/app/shared/interfaces/ingredient.interface";
+import { Recette } from "src/app/shared/interfaces/recette.interface";
 import { RecetteDetail } from "../../shared/interfaces/recette-detail.interface";
-import { isNullOrUndefined } from "util";
+import { RecetteService } from "../../shared/services/recette.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-recette",
@@ -20,7 +19,7 @@ export class RecetteContainer implements OnInit {
 
   constructor(
     private recetteService: RecetteService,
-    private ingredientService: IngredientService,
+    private router: Router,
     private fb: FormBuilder
   ) {}
 
@@ -48,5 +47,8 @@ export class RecetteContainer implements OnInit {
 
   getRecetteDetail(id: number) {
     this.recetteService.recetteDetailRR(id);
+    this.router.navigate(["/detail"], {
+      state: { recette: this.recette$ }
+    });
   }
 }

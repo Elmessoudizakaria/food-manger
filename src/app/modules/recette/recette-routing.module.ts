@@ -13,7 +13,7 @@ const routes: Routes = [
     path: "recette",
     component: RecetteContainer
   },
-  { path: "detail", component: RecetteDetailComponent, data: {} }
+  { path: "detail", component: RecetteDetailComponent, data: { recette: {} } }
 ];
 
 @NgModule({

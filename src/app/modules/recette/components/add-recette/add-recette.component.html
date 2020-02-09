@@ -1,0 +1,28 @@
+<form [formGroup]="form" fxLayout="column" ngSubmit="onSubmit($event)">
+  <mat-form-field appearance="outline">
+    <mat-label>name</mat-label>
+    <input matInput placeholder="name" formControlName="name" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>description</mat-label>
+    <input matInput placeholder="description" formControlName="description" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Toppings</mat-label>
+    <mat-select formControlName="toppings" multiple>
+      <mat-option *ngFor="let topping of toppingList" [value]="topping.id">{{
+        topping.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>prix</mat-label>
+    <input
+      matInput
+      placeholder="description"
+      formControlName="prix"
+      type="number"
+    />
+  </mat-form-field>
+  <button mat-raised-button color="primary">save</button>
+</form>

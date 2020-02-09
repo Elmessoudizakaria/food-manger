@@ -1,0 +1,14 @@
+<div fxLayout="row wrap" style="height: 100%;" fxLayoutGap="2%">
+  <div fxFlex="30" *ngFor="let item of recettes">
+    <mat-card>
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+      <strong>{{ item.prix }} $</strong>
+      <button mat-raised-button color="primary" (click)="getDetail(item.id)">
+        detail
+      </button>
+    </mat-card>
+  </div>
+</div>
+
+<!-- (click)="getDetail(item.id)" -->

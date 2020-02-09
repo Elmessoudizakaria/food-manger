@@ -1,0 +1,79 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "recettes": [
+    {
+      "id": 1,
+      "name": "recette 1",
+      "description": "recette description",
+      "prix": 39
+    },
+    {
+      "id": 2,
+      "name": "recette 2",
+      "description": "recette description",
+      "prix": 40
+    },
+    {
+      "name": "recette 3",
+      "description": "recette description",
+      "prix": 17,
+      "toppings": [
+        1,
+        2
+      ],
+      "id": 3
+    },
+    {
+      "name": "recette 4",
+      "description": "recette description",
+      "prix": 13,
+      "toppings": [
+        3
+      ],
+      "id": 4
+    },
+    {
+      "name": "recette 5",
+      "description": "recette description",
+      "prix": 27,
+      "toppings": [
+        2,
+        3
+      ],
+      "id": 5
+    }
+  ],
+  "ingredients": [
+    {
+      "id": 1,
+      "name": "Mushroom",
+      "description": "ingredient description",
+      "prix": 39
+    },
+    {
+      "id": 2,
+      "name": "Onion",
+      "description": "ingredient description",
+      "prix": 40
+    },
+    {
+      "id": 3,
+      "name": "Tomato",
+      "description": "ingredient description",
+      "prix": 40
+    }
+  ]
+}

@@ -1,5 +1,16 @@
-<div>
+<div fxFlex="50" fxFlexOffset="20">
   <mat-card>
-    name
+    <h3>Recette Detail</h3>
+    <label>name {{ (recette$ | async).name }}</label>
+    <p>
+      {{ (recette$ | async)?.description }}
+    </p>
+    <div>
+      <ul>
+        <li *ngFor="let topping of (recette$ | async)?.toppingsDetail">
+          {{ (topping | async)?.name }}
+        </li>
+      </ul>
+    </div>
   </mat-card>
 </div>

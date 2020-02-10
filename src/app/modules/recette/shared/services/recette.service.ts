@@ -1,45 +1,60 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Recette } from "src/app/shared/interfaces/recette.interface";
-import { IngredientService } from "src/app/modules/ingredient/shared/services/ingredient.service";
-import { RecetteDetail } from "../interfaces/recette-detail.interface";
-import { Observable, of, Subject } from "rxjs";
-import { Ingredient } from "src/app/shared/interfaces/ingredient.interface";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { IngredientService } from 'src/app/modules/ingredient/shared/services/ingredient.service';
+import { Ingredient } from 'src/app/shared/interfaces/ingredient.interface';
+import { Recette } from 'src/app/shared/interfaces/recette.interface';
+import { environment } from 'src/environments/environment';
+import { RecetteDetail } from '../interfaces/recette-detail.interface';
 @Injectable()
 export class RecetteService {
-  public recettes$: Observable<Recette[]> = this.recettes();
-  public recette$: Observable<RecetteDetail>;
+  private recettes = new BehaviorSubject<Recette[]>([{}]);
+  public recettes$: Observable<Recette[]> = this.recettes.asObservable();
+  private recette = new BehaviorSubject<RecetteDetail>({});
+  public recette$ = this.recette.asObservable();
   public test$ = new Subject<RecetteDetail>();
   public ingredients$: Observable<
     Ingredient[]
   > = this.ingredientService.ingredients();
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
     private http: HttpClient,
-    private readonly ingredientService: IngredientService
+    private readonly ingredientService: IngredientService,
   ) {}
 
-  recettes() {
-    return this.http.get<Recette[]>("http://localhost:3000/recettes");
+  loadRecettes() {
+    this.subscriptions.push(
+      this.http
+        .get<Recette[]>(`${environment.api}/recettes`)
+        .subscribe(el => this.recettes.next(el)),
+    );
   }
 
   addRecette(recette: Recette) {
-    return this.http.post<Recette>("http://localhost:3000/recettes", recette);
+    this.subscriptions.push(
+      this.http
+        .post<Recette>(`${environment.api}/recettes`, recette)
+        .subscribe(el => this.loadRecettes()),
+    );
   }
 
   recetteDetail(id: number) {
-    return this.http.get<Recette>(`http://localhost:3000/recettes/${id}`);
+    this.subscriptions.push(
+      this.http
+        .get<RecetteDetail>(`${environment.api}/recettes/${id}`)
+        .subscribe(el => {
+          el.toppingsDetail = el.toppings.map(id =>
+            this.ingredientService.ingredientDetail(id),
+          );
+          this.recette.next(el);
+          // this.test$.next(el);
+        }),
+    );
   }
 
-  recetteDetailRR(id: number) {
-    return this.http
-      .get<RecetteDetail>(`http://localhost:3000/recettes/${id}`)
-      .subscribe(el => {
-        el.toppingsDetail = el.toppings.map(id =>
-          this.ingredientService.ingredientDetail(id)
-        );
-        // this.recette$ = of(el);
-        this.test$.next(el);
-      });
+  onDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

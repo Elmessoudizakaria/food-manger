@@ -1,7 +1,11 @@
-import { Recette } from "src/app/shared/interfaces/recette.interface";
-import { Ingredient } from "src/app/shared/interfaces/ingredient.interface";
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs'                                          ;
+import { Ingredient } from 'src/app/shared/interfaces/ingredient.interface';
 
-export interface RecetteDetail extends Recette {
-  toppingsDetail: Observable<Ingredient>[];
+export interface RecetteDetail {
+  id            ?: number                  ;
+  name          ?: string                  ;
+  description   ?: string                  ;
+  prix          ?: number                  ;
+  toppings      ?: number[]                ;
+  toppingsDetail?: Observable<Ingredient>[];
 }

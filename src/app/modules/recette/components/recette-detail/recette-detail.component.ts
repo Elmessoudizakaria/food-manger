@@ -1,16 +1,14 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { RecetteDetail } from "../../shared/interfaces/recette-detail.interface";
-import { ActivatedRoute } from "@angular/router";
+import { Component     , OnInit } from '@angular/core'                        ;
+import { RecetteService         } from '../../shared/services/recette.service';
 
 @Component({
-  selector: "app-recette-detail",
-  templateUrl: "./recette-detail.component.html",
-  styleUrls: ["./recette-detail.component.scss"]
+  selector: 'app-recette-detail',
+  templateUrl: './recette-detail.component.html',
+  styleUrls: ['./recette-detail.component.scss'],
 })
 export class RecetteDetailComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {
-    console.log(this.route.snapshot.params["recette"]);
-  }
+  recette$ = this.recetteService.recette$;
+  constructor(private recetteService: RecetteService) {}
 
   ngOnInit(): void {}
 }

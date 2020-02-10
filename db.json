@@ -54,6 +54,37 @@
         3
       ],
       "id": 5
+    },
+    {
+      "name": "recette  6",
+      "description": "rectte description",
+      "prix": 15,
+      "toppings": [
+        1,
+        2,
+        3
+      ],
+      "id": 6
+    },
+    {
+      "name": "recette 7",
+      "description": "recette description",
+      "prix": 19,
+      "toppings": [
+        1,
+        4
+      ],
+      "id": 7
+    },
+    {
+      "name": "recette 8",
+      "description": "recette description",
+      "prix": 23,
+      "toppings": [
+        2,
+        3
+      ],
+      "id": 8
     }
   ],
   "ingredients": [
@@ -74,6 +105,12 @@
       "name": "Tomato",
       "description": "ingredient description",
       "prix": 40
+    },
+    {
+      "id": 4,
+      "name": "Potatos",
+      "description": "ingredient description",
+      "prix": 10
     }
   ]
 }

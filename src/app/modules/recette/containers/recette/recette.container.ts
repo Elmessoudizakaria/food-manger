@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { Ingredient } from 'src/app/shared/interfaces/ingredient.interface';
-import { Recette } from 'src/app/shared/interfaces/recette.interface';
-import { RecetteDetail } from '../../shared/interfaces/recette-detail.interface';
-import { RecetteService } from '../../shared/services/recette.service';
-import { Router } from '@angular/router';
+import { Component     , OnInit     } from '@angular/core'                                   ;
+import { FormBuilder   , Validators } from '@angular/forms'                                  ;
+import { Router                     } from '@angular/router'                                 ;
+import { Observable                 } from 'rxjs'                                            ;
+import { Ingredient                 } from 'src/app/shared/interfaces/ingredient.interface'  ;
+import { Recette                    } from 'src/app/shared/interfaces/recette.interface'     ;
+import { RecetteDetail              } from '../../shared/interfaces/recette-detail.interface';
+import { RecetteService             } from '../../shared/services/recette.service'           ;
 
 @Component({
   selector: 'app-recette',
@@ -13,9 +13,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./recette.container.scss'],
 })
 // tslint:disable-next-line: component-class-suffix
-export class RecetteContainer implements OnInit, OnDestroy {
+export class RecetteContainer implements OnInit {
   recettes$: Observable<Recette[]> = this.recetteService.recettes$;
-  recette$: Observable<RecetteDetail> = this.recetteService.test$;
+  recette$: Observable<RecetteDetail> = this.recetteService.recette$;
   ingredients$: Observable<Ingredient[]> = this.recetteService.ingredients$;
 
   constructor(
@@ -33,11 +33,8 @@ export class RecetteContainer implements OnInit, OnDestroy {
     }),
   });
   ngOnInit(): void {
-    this.recetteService.loadRecettes();
-  }
-
-  ngOnDestroy(): void {
     this.recetteService.onDestroy();
+    this.recetteService.loadRecettes();
   }
   addRecette() {
     this.recetteService.addRecette(this.form.get('recette').value);

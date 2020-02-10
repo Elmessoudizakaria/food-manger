@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { IngredientService } from 'src/app/modules/ingredient/shared/services/ingredient.service';
-import { Ingredient } from 'src/app/shared/interfaces/ingredient.interface';
-import { Recette } from 'src/app/shared/interfaces/recette.interface';
-import { environment } from 'src/environments/environment';
-import { RecetteDetail } from '../interfaces/recette-detail.interface';
+import { HttpClient                                           } from '@angular/common/http'                                         ;
+import { Injectable                                           } from '@angular/core'                                                ;
+import { BehaviorSubject  , Observable, Subject, Subscription } from 'rxjs'                                                         ;
+import { IngredientService                                    } from 'src/app/modules/ingredient/shared/services/ingredient.service';
+import { Ingredient                                           } from 'src/app/shared/interfaces/ingredient.interface'               ;
+import { Recette                                              } from 'src/app/shared/interfaces/recette.interface'                  ;
+import { environment                                          } from 'src/environments/environment'                                 ;
+import { RecetteDetail                                        } from '../interfaces/recette-detail.interface'                       ;
 @Injectable()
 export class RecetteService {
   private recettes = new BehaviorSubject<Recette[]>([{}]);
@@ -49,7 +49,6 @@ export class RecetteService {
             this.ingredientService.ingredientDetail(id),
           );
           this.recette.next(el);
-          // this.test$.next(el);
         }),
     );
   }

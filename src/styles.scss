@@ -150,6 +150,7 @@ body {
   --text-primary-color: #{$light-primary-text};
   --text-primary-lighter-color: #{$dark-primary-text};
   --text-primary-darker-color: #{$light-primary-text};
+  margin: 0px;
 }
 
 $mat-primary: (

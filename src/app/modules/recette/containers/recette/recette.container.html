@@ -1,26 +1,22 @@
-<div fxLayout="row">
-  <app-recette-list
-    fxFlex="60"
-    [recettes]="(recettes$ | async)"
-    (getRecetteDetail)="getRecetteDetail($event)"
-  ></app-recette-list>
-  <div fxFlex="25">
-    <h2>Create new Recette</h2>
-    <app-add-recette
-      [form]="form.get('recette')"
-      [toppingList]="(ingredients$ | async)"
-      (submit)="addRecette()"
-    ></app-add-recette>
+<div fxLayout="column" fxLayoutGap="2%">
+  <div fxLayout="row" >
+    <app-recette-list
+      fxFlex="60"
+      [recettes]="(recettes$ | async)"
+      (getRecetteDetail)="getRecetteDetail($event)"
+      (deleteRecete)="deleteRecete($event)"
+    ></app-recette-list>
+    <div fxFlex="25">
+      <h2>Create new Recette</h2>
+      <app-add-recette
+        [form]="form.get('recette')"
+        [toppingList]="(ingredients$ | async)"
+        (submit)="addRecette()"
+      ></app-add-recette>
+    </div>
+  </div>
+  <!-- <button mat-button (click)="test()">test</button> -->
+  <div *ngIf="(recette$ | async)?.name">
+    <router-outlet></router-outlet>
   </div>
 </div>
-
-<!-- <div>
-  {{(recette$ | async)?.name}} {{(recette$ | async)?.description}}
-  <div>
-    <ul>
-      <li *ngFor="let topping of (recette$ | async)?.toppingsDetail">
-        {{(topping | async)?.name}}
-      </li>
-    </ul>
-  </div>
-</div> -->

@@ -15,28 +15,6 @@
   ],
   "recettes": [
     {
-      "id": 1,
-      "name": "recette 1",
-      "description": "recette description",
-      "prix": 39
-    },
-    {
-      "id": 2,
-      "name": "recette 2",
-      "description": "recette description",
-      "prix": 40
-    },
-    {
-      "name": "recette 3",
-      "description": "recette description",
-      "prix": 17,
-      "toppings": [
-        1,
-        2
-      ],
-      "id": 3
-    },
-    {
       "name": "recette 4",
       "description": "recette description",
       "prix": 13,
@@ -54,17 +32,6 @@
         3
       ],
       "id": 5
-    },
-    {
-      "name": "recette  6",
-      "description": "rectte description",
-      "prix": 15,
-      "toppings": [
-        1,
-        2,
-        3
-      ],
-      "id": 6
     },
     {
       "name": "recette 7",
@@ -87,14 +54,13 @@
       "id": 8
     },
     {
-      "name": "recette 9",
+      "name": "recette 2",
       "description": "recette description",
-      "prix": 91,
+      "prix": 36,
       "toppings": [
         1,
         2,
-        3,
-        4
+        3
       ],
       "id": 9
     }

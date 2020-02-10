@@ -1,12 +1,24 @@
+<h3>List des Recettes</h3>
 <div fxLayout="row wrap" style="height: 100%;" fxLayoutGap="2%">
   <div fxFlex="30" *ngFor="let item of recettes">
     <mat-card>
       <h3>{{ item.name }}</h3>
       <p>{{ item.description }}</p>
-      <strong>{{ item.prix }} $</strong>
-      <button mat-raised-button color="primary" (click)="getDetail(item.id)">
-        detail
-      </button>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <strong>{{ item.prix }} $</strong>
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="getDetail(item.id)"
+          >
+            detail
+          </button>
+          <button mat-button color="warn" (click)="deleteOne(item.id)">
+            delete
+          </button>
+        </div>
+      </div>
     </mat-card>
   </div>
 </div>

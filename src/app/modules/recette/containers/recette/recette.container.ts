@@ -1,11 +1,11 @@
-import { Component    , OnInit     } from '@angular/core'                                   ;
-import { FormBuilder  , Validators } from '@angular/forms'                                  ;
-import { Router                    } from '@angular/router'                                 ;
-import { Observable                } from 'rxjs'                                            ;
-import { Ingredient                } from 'src/app/shared/interfaces/ingredient.interface'  ;
-import { Recette                   } from 'src/app/shared/interfaces/recette.interface'     ;
-import { RecetteDetail             } from '../../shared/interfaces/recette-detail.interface';
-import { RecetteSanbox             } from './recette.sandbox'                               ;
+import { Component    , OnDestroy, OnInit } from '@angular/core'                                   ;
+import { FormBuilder  , Validators        } from '@angular/forms'                                  ;
+import { Router                           } from '@angular/router'                                 ;
+import { Observable                       } from 'rxjs'                                            ;
+import { Ingredient                       } from 'src/app/shared/interfaces/ingredient.interface'  ;
+import { Recette                          } from 'src/app/shared/interfaces/recette.interface'     ;
+import { RecetteDetail                    } from '../../shared/interfaces/recette-detail.interface';
+import { RecetteSanbox                    } from './recette.sandbox'                               ;
 
 @Component({
   selector: 'app-recette',
@@ -13,7 +13,7 @@ import { RecetteSanbox             } from './recette.sandbox'                   
   styleUrls: ['./recette.container.scss'],
 })
 // tslint:disable-next-line: component-class-suffix
-export class RecetteContainer implements OnInit {
+export class RecetteContainer implements OnInit, OnDestroy {
   recettes$: Observable<Recette[]> = this.recetteSanbox.recettes$;
   recette$: Observable<RecetteDetail> = this.recetteSanbox.recette$;
   ingredients$: Observable<Ingredient[]> = this.recetteSanbox.ingredients$;
@@ -33,13 +33,13 @@ export class RecetteContainer implements OnInit {
     }),
   });
   ngOnInit(): void {
-    console.log('test');
-    this.recetteSanbox.onDestroy();
     this.recetteSanbox.loadRecettes();
+  }
+  ngOnDestroy(): void {
+    this.recetteSanbox.onDestroy();
   }
   addRecette() {
     const recette = this.form.get('recette').value;
-    console.log(recette);
     this.recetteSanbox.addRecette(recette);
   }
 

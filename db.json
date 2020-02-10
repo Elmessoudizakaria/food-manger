@@ -54,13 +54,14 @@
       "id": 8
     },
     {
-      "name": "recette 2",
+      "name": "recette 3",
       "description": "recette description",
-      "prix": 36,
+      "prix": 22,
       "toppings": [
         1,
         2,
-        3
+        3,
+        4
       ],
       "id": 9
     }

@@ -16,34 +16,44 @@ export class RecetteSanbox {
     Ingredient[]
   > = this.ingredientService.ingredients();
   private subscriptions: Subscription[] = [];
-  
+
   constructor(
     private readonly recetteService: RecetteService,
     private readonly ingredientService: IngredientService,
   ) {}
 
   loadRecettes() {
-    this.recetteService.loadRecettes().subscribe(el => {
-      this.recettes.next(el);
-    });
+    this.subscriptions.push(
+      this.recetteService.loadRecettes().subscribe(el => {
+        this.recettes.next(el);
+      }),
+    );
   }
 
   addRecette(recette: Recette) {
-    this.recetteService
-      .addRecette(recette)
-      .subscribe(el => this.loadRecettes());
+    this.subscriptions.push(
+      this.recetteService
+        .addRecette(recette)
+        .subscribe(el => this.loadRecettes()),
+    );
   }
 
   recetteDetail(id: number) {
-    this.recetteService.recetteDetail(id).subscribe(el => {
-      el.toppingsDetail = el.toppings.map(toppingId =>
-        this.ingredientService.ingredientDetail(toppingId),
-      );
-      this.recette.next(el);
-    });
+    this.subscriptions.push(
+      this.recetteService.recetteDetail(id).subscribe(el => {
+        el.toppingsDetail = el.toppings.map(toppingId =>
+          this.ingredientService.ingredientDetail(toppingId),
+        );
+        this.recette.next(el);
+      }),
+    );
   }
   deleteRecette(id: number) {
-    this.recetteService.deleteRecette(id).subscribe(el => this.loadRecettes());
+    this.subscriptions.push(
+      this.recetteService
+        .deleteRecette(id)
+        .subscribe(el => this.loadRecettes()),
+    );
   }
   onDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
